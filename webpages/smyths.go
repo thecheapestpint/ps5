@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"ps5/request"
 	"strings"
+	"time"
 )
 
 const (
@@ -18,7 +19,7 @@ func SmythScrape(url string) bool {
 	}
 
 	if strings.Contains(strings.ToLower(body), outOfStockLabel) {
-		fmt.Printf(debugStillOutOfStock, "Smyths")
+		println(fmt.Sprintf(debugStillOutOfStock, "Smyths", time.Now().Format("2006-01-02 15:04:05")))
 	} else {
 		return true
 	}

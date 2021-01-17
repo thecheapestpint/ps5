@@ -21,10 +21,6 @@ func RequestPage(url string) (string, bool, error) {
 			return "", false, err
 		}
 
-		respUrl := resp.Request.URL.String()
-		a := respUrl != url
-		println(a)
-
 		return string(bodyBytes), resp.Request.URL.String() != url, nil
 	} else {
 		return "", false, fmt.Errorf("%s", "Error fetching request")

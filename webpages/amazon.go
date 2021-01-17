@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"ps5/request"
 	"strings"
+	"time"
 )
 
 func Amazon(url string) bool {
 
 	scraper, err := request.New(url)
 	if err != nil {
-		println(scraperError + err.Error())
+		println(fmt.Sprintf(scraperError + err.Error()))
 	}
 
 	entry := scraper.GetSelector("#availability > span")
@@ -18,9 +19,9 @@ func Amazon(url string) bool {
 	scraper.Stop()
 
 	if strings.Contains(inner, "Currently unavailable") {
-		fmt.Printf(debugStillOutOfStock, "Amazon")
+		println(fmt.Sprintf(debugStillOutOfStock, "Amazon", time.Now().Format("2006-01-02 15:04:05")))
 	} else {
-		fmt.Printf(nowInStock, url)
+		println(fmt.Sprintf(nowInStock, url))
 		return true
 	}
 	return false

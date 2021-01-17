@@ -14,7 +14,7 @@ func Argos(url string) bool {
 	}
 
 	if redirected == false {
-		fmt.Printf("Argos is no longer sending us to a OOS page:" + url)
+		println(fmt.Sprintf("Argos is no longer sending us to a OOS page:" + url))
 		return true
 	}
 

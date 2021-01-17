@@ -1,0 +1,5 @@
+package webpages
+
+func Game() {
+
+}

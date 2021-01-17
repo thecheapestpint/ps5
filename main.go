@@ -23,7 +23,7 @@ var amazonBrowserOpen = false
 func main() {
 	println("Starting ps5 notification script")
 
-	for _ = range time.Tick(3 * time.Second) {
+	for _ = range time.Tick(5 * time.Second) {
 		scrape()
 	}
 

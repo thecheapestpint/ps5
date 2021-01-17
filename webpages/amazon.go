@@ -14,7 +14,13 @@ func Amazon(url string) bool {
 		println(fmt.Sprintf(scraperError + err.Error()))
 	}
 
-	entry := scraper.GetSelector("#availability > span")
+	entry, err := scraper.GetSelector("#availability > span")
+
+	if err != nil {
+		fmt.Printf("could not get entries: %v", err)
+		return false
+	}
+
 	inner, _ := entry.InnerText()
 	scraper.Stop()
 

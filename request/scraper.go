@@ -19,7 +19,13 @@ func New(url string) (*Scraper, error) {
 		log.Fatalf("could not start playwright: %v", err)
 	}
 
-	browser, err := pw.Chromium.Launch()
+	headless := true
+	sandbox := false
+	opts := playwright.BrowserTypeLaunchOptions{
+		Headless:          &headless,
+		ChromiumSandbox:   &sandbox,
+	}
+	browser, err := pw.Chromium.Launch(opts)
 
 	if err != nil {
 		return nil, fmt.Errorf("could not launch browser: %v", err)
@@ -41,12 +47,12 @@ func New(url string) (*Scraper, error) {
 	}, nil
 }
 
-func (pw *Scraper) GetSelector(selector string) playwright.ElementHandle {
+func (pw *Scraper) GetSelector(selector string) (playwright.ElementHandle, error) {
 	entry, err := pw.Page.QuerySelector(selector)
 	if err != nil {
-		fmt.Printf("could not get entries: %v", err)
+		return nil, err
 	}
-	return entry
+	return entry, nil
 }
 
 func (pw *Scraper) Stop() {
